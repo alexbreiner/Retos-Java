@@ -1,26 +1,21 @@
 package model.dao;
 
+import model.consultas.Consultas;
 import model.vo.DeudasPorProyectoVo;
 import util.JDBCUtilities;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DeudasPorProyectoDao {
+    PreparedStatement statement;
+    ResultSet resultSet;
+    ArrayList<DeudasPorProyectoVo> respuesta = new ArrayList<>();
+    Consultas query = new Consultas();
 
-    public String consulta = "SELECT ID_Proyecto, SUM(Cantidad * Precio_Unidad)  AS VALOR\n" +
-            "FROM Compra JOIN MaterialConstruccion \n" +
-            "USING(ID_MaterialConstruccion) WHERE Pagado = 'No' GROUP BY ID_PROYECTO\n" +
-            "ORDER BY VALOR DESC \n" +
-            "LIMIT 49;";
-
-    public ArrayList<DeudasPorProyectoVo> deudasProyectos() throws SQLException {
-        ArrayList<DeudasPorProyectoVo> respuesta = new ArrayList<DeudasPorProyectoVo>();
+    public ArrayList<DeudasPorProyectoVo> deudasProyectos(Double limiteInferior) throws SQLException {
         Connection connection = JDBCUtilities.getConnection();
-        PreparedStatement statement;
-        ResultSet resultSet;
-
         try {
-            statement = connection.prepareStatement(consulta);
+            statement = connection.prepareStatement(query.consultasAdeudados(limiteInferior));
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 DeudasPorProyectoVo deudas = new DeudasPorProyectoVo();

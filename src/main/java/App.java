@@ -1,11 +1,8 @@
 import view.ReportesView;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 public class App {
     public static void main(String[] args) {
-        System.out.println("hola mundo");
+
         ReportesView view1 = new ReportesView();
         var limiteInferior = 50_000d;
         view1.totalAdeudadoPorProyectosSuperioresALimite(limiteInferior);
@@ -16,6 +13,9 @@ public class App {
 
         ReportesView view3 = new ReportesView();
         view3.lideresQueMasGastan();
+
+
+
 
         /*var reportesView = new ReportesView();
         var banco = "Conavi";

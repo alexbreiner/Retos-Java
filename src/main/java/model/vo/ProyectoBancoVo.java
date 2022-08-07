@@ -7,7 +7,7 @@ public class ProyectoBancoVo {
     private String clasificacion;
     private int estrato;
     private String lider;
-
+       
     public ProyectoBancoVo() {
 
     }
@@ -68,4 +68,5 @@ public class ProyectoBancoVo {
     public void setLider(String lider) {
         this.lider = lider;
     }
+   
 }
